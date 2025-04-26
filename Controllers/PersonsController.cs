@@ -1,13 +1,30 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using PersonManagementApp.Data;
+using PersonManagementApp.Models;
 
 namespace PersonManagementApp.Controllers;
 
 [Route("Persons")]
 public class PersonsController : Controller
 {
-    [HttpGet()]
-    public IActionResult GetAllPersons()
+    protected readonly MyAppContext _context;
+
+    public PersonsController(MyAppContext context)
     {
-        return Content("Persons");
+        _context = context;
+    }
+
+    [HttpGet()]
+    public async Task<IActionResult> Index()
+    {
+        var person = await _context.Persons.ToListAsync<Person>();
+
+        return View(person);
+    }
+
+    public IActionResult AddPerson(string FirstName)
+    {
+        return Content($"FirstName: {FirstName}");
     }
 }
