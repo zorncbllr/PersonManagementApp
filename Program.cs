@@ -1,7 +1,16 @@
+using Microsoft.EntityFrameworkCore;
+using PersonManagementApp.Data;
+
 var builder = WebApplication.CreateBuilder(args);
+
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnectionString");
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<MyAppContext>(
+    options => options.UseSqlServer(connectionString)
+);
 
 var app = builder.Build();
 
