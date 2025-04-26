@@ -9,7 +9,10 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<MyAppContext>(
-    options => options.UseSqlServer(connectionString)
+    options => options.UseMySql(
+        connectionString,
+        new MySqlServerVersion(new Version(8, 4, 5))
+        )
 );
 
 var app = builder.Build();
