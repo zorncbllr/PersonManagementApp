@@ -1,19 +1,17 @@
-using Microsoft.EntityFrameworkCore;
+
 using PersonManagementApp.Data;
+using PersonManagementApp.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnectionString");
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddDbContext<MyAppContext>(
-    options => options.UseMySql(
-        connectionString,
-        new MySqlServerVersion(new Version(8, 4, 5))
-        )
-);
+builder.Services.AddSingleton<DataContext>();
+builder.Services.AddSingleton<PersonRepository>();
+
 
 var app = builder.Build();
 

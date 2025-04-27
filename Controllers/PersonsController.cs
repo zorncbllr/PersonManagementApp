@@ -1,30 +1,24 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using PersonManagementApp.Data;
-using PersonManagementApp.Models;
+using PersonManagementApp.Repositories;
 
 namespace PersonManagementApp.Controllers;
 
-[Route("Persons")]
+[Route("persons")]
 public class PersonsController : Controller
 {
-    protected readonly MyAppContext _context;
+    private readonly PersonRepository _repository;
 
-    public PersonsController(MyAppContext context)
+    public PersonsController(PersonRepository personRepository)
     {
-        _context = context;
+        _repository = personRepository;
     }
 
     [HttpGet()]
-    public async Task<IActionResult> Index()
+    public async Task<ViewResult> Index()
     {
-        var person = await _context.Persons.ToListAsync<Person>();
+        var persons = await _repository.GetAllPersonsAsync();
 
-        return View(person);
+        return View(persons);
     }
 
-    public IActionResult AddPerson(string FirstName)
-    {
-        return Content($"FirstName: {FirstName}");
-    }
 }
