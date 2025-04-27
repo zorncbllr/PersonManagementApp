@@ -2,6 +2,10 @@
     ViewData["title"] = "Person Management";
 }
 
-<main class="p-8">
-  @await Component.InvokeAsync("Table")
+<main class="p-8 flex flex-col gap-4">
+
+@await Component.InvokeAsync("Table")
+
+@await Component.InvokeAsync("CreationForm")
+
 </main>
