@@ -1,0 +1,32 @@
+@model IEnumerable<PersonManagementApp.Models.Person>
+
+
+ <div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
+  <table class="table">
+    <!-- head -->
+    <thead>
+      <tr>
+        <th></th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Gender</th>
+        <th>Religion</th>
+        <th>Birth Place</th>
+        <th>Birth Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach (var person in Model) {
+        <tr>
+          <td>@person.PersonId</td>
+          <td>@person.FirstName</td>
+          <td>@person.LastName</td>
+          <td>@person.Gender</td>
+          <td>@person.Religion</td>
+          <td>@person.BirthPlace</td>
+          <td>@person.DateOfBirth</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

@@ -13,12 +13,8 @@ public class PersonsController : Controller
         _repository = personRepository;
     }
 
-    [HttpGet()]
-    public async Task<ViewResult> Index()
+    public ViewResult Index()
     {
-        var persons = await _repository.GetAllPersonsAsync();
-
-        return View(persons);
+        return View();
     }
-
 }
