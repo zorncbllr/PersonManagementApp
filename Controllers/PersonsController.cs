@@ -20,6 +20,7 @@ public class PersonsController : Controller
     }
 
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> CreatePerson(
             string firstName,
             string lastName,
@@ -40,6 +41,15 @@ public class PersonsController : Controller
         };
 
         await _repository.CreatePersonAsync(person);
+
+        return RedirectToAction("Index");
+    }
+
+    [HttpPost("delete")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeletePerson(int PersonId)
+    {
+        await _repository.DeletePersonAsync(PersonId);
 
         return RedirectToAction("Index");
     }

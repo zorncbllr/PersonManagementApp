@@ -35,37 +35,41 @@
                     Birth Date
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    <span class="sr-only">Edit</span>
+                    <span class="sr-only">Actions</span>
                 </th>
             </tr>
         </thead>
         <tbody>
            
-           @foreach (var persons in Model) {
+           @foreach (var person in Model) {
              <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    @persons.PersonId
+                    @person.PersonId
                 </th>
                 <td class="px-6 py-4">
-                    @persons.FirstName
+                    @person.FirstName
                 </td>
                 <td class="px-6 py-4">
-                    @persons.LastName
+                    @person.LastName
                 </td>
                 <td class="px-6 py-4">
-                    @persons.Gender
+                    @person.Gender
                 </td>
                 <td class="px-6 py-4">
-                    @persons.Religion
+                    @person.Religion
                 </td>
                 <td class="px-6 py-4">
-                    @persons.BirthPlace
+                    @person.BirthPlace
                 </td>
                 <td class="px-6 py-4 w-fit">
-                    @persons.DateOfBirth
+                    @person.DateOfBirth
                 </td>
-                <td class="px-6 py-4 text-right">
-                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                <td class="px-6 py-4 text-right flex w-fit gap-4">
+                    
+                    <form asp-action="DeletePerson" asp-controller="Persons" method="post">
+                        <input type="hidden" value="@person.PersonId" name="personId">
+                        <button type="submit" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</button>
+                    </form>
                 </td>
             </tr>
            }
